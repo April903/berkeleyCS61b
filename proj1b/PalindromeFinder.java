@@ -1,6 +1,8 @@
 /** This class outputs all palindromes in the words file in the current directory. */
 public class PalindromeFinder {
-    /*
+
+    static OffByOne obo = new OffByOne();
+
     public static void main(String[] args) {
         int minLength = 4;
         In in = new In("../library-sp18/data/words.txt");
@@ -8,9 +10,9 @@ public class PalindromeFinder {
 
         while (!in.isEmpty()) {
             String word = in.readString();
-            if (word.length() >= minLength && palindrome.isPalindrome(word)) {
+            if (word.length() >= minLength && palindrome.isPalindrome(word, obo)) {
                 System.out.println(word);
             }
         }
-    } Uncomment this class once you've written isPalindrome. */
+    }
 }
