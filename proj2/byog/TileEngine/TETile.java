@@ -1,6 +1,7 @@
 package byog.TileEngine;
 
-import java.awt.Color;
+import java.awt.*;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -21,12 +22,13 @@ import byog.Core.RandomUtils;
  * to make your TETile class mutable, if you prefer.
  */
 
-public class TETile {
+public class TETile implements Serializable {
     private final char character; // Do not rename character or the autograder will break.
     private final Color textColor;
     private final Color backgroundColor;
     private final String description;
     private final String filepath;
+    private final int fontSize;
 
     /**
      * Full constructor for TETile objects.
@@ -37,12 +39,13 @@ public class TETile {
      * @param filepath Full path to image to be used for this tile. Must be correct size (16x16)
      */
     public TETile(char character, Color textColor, Color backgroundColor, String description,
-                  String filepath) {
+                  String filepath, int fontSize) {
         this.character = character;
         this.textColor = textColor;
         this.backgroundColor = backgroundColor;
         this.description = description;
         this.filepath = filepath;
+        this.fontSize = fontSize;
     }
 
     /**
@@ -53,12 +56,13 @@ public class TETile {
      * @param backgroundColor The color drawn behind the character.
      * @param description The description of the tile, shown in the GUI on hovering over the tile.
      */
-    public TETile(char character, Color textColor, Color backgroundColor, String description) {
+    public TETile(char character, Color textColor, Color backgroundColor, String description, int fontSize) {
         this.character = character;
         this.textColor = textColor;
         this.backgroundColor = backgroundColor;
         this.description = description;
         this.filepath = null;
+        this.fontSize = fontSize;
     }
 
     /**
@@ -67,7 +71,7 @@ public class TETile {
      * @param textColor foreground color for tile copy
      */
     public TETile(TETile t, Color textColor) {
-        this(t.character, textColor, t.backgroundColor, t.description, t.filepath);
+        this(t.character, textColor, t.backgroundColor, t.description, t.filepath, t.fontSize);
     }
 
 
@@ -95,6 +99,7 @@ public class TETile {
         StdDraw.setPenColor(backgroundColor);
         StdDraw.filledSquare(x + 0.5, y + 0.5, 0.5);
         StdDraw.setPenColor(textColor);
+        StdDraw.setFont(new Font("Monaco", Font.BOLD, fontSize));
         StdDraw.text(x + 0.5, y + 0.5, Character.toString(character()));
     }
 
